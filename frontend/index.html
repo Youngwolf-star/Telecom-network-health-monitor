@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Telecom Network Monitor</title>
+</head>
+
+<body>
+<h1>Telecom Network Health Monitor</h1>
+
+<button onclick="check()">Check Network</button>
+
+<pre id="output"></pre>
+
+<script>
+async function check() {
+  const r = await fetch("https://telecom-network-health-monitor.onrender.com");
+  const d = await r.json();
+  document.getElementById("output").textContent =
+    JSON.stringify(d,null,2);
+}
+</script>
+
+</body>
+</html>
