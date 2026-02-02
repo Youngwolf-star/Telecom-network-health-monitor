@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Telecom Network Monitor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecom Network Health Monitor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; }
+        h1 { color: #333; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        pre { background-color: #eee; padding: 10px; border-radius: 5px; }
+    </style>
 </head>
-
 <body>
-<h1>Telecom Network Health Monitor</h1>
 
+<h1>Telecom Network Health Monitor</h1>
+<p>Click the button below to check network status:</p>
 <button onclick="check()">Check Network</button>
 
-<pre id="output"></pre>
+<pre id="output">Results will appear here...</pre>
 
 <script>
 async function check() {
-  const r = await fetch("https://telecom-network-health-monitor.onrender.com");
-  const d = await r.json();
-  document.getElementById("output").textContent =
-    JSON.stringify(d,null,2);
+    try {
+        // <-- REPLACE THIS URL with your Render backend URL
+        const backendUrl = "https://telecom-network-health-monitor.onrender.com";
+
+        const response = await fetch(backendUrl);
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        const data = await response.json();
+        document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+        document.getElementById("output").textContent = "Error: " + err.message;
+    }
 }
 </script>
 
 </body>
 </html>
+
