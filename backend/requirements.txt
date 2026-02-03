@@ -2,3 +2,8 @@ fastapi
 uvicorn
 requests
 ping3
+sqlalchemy
+psycopg2-binary
+python-jose
+passlib[bcrypt]
+pandas
