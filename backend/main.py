@@ -5,14 +5,20 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Telecom Network Monitor API running"}
+    return {"message": "Network Health Monitor API running"}
 
 @app.get("/health")
 def health():
     host = "8.8.8.8"
-    result = subprocess.run(["ping", "-c", "1", host], capture_output=True)
-    status = "UP" if result.returncode == 0 else "DOWN"
+
+    try:
+        subprocess.check_output(["ping", "-n", "1", host])
+        status = "UP"
+    except:
+        status = "DOWN"
+
     return {
         "host": host,
         "status": status
     }
+
