@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Network Health Monitor API running"}
+    return {"message": "Telecom Network Health Monitor API running"}
 
 @app.get("/health")
 def health():
