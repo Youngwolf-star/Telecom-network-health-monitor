@@ -1,0 +1,9 @@
+from fastapi import APIRouter
+import subprocess
+
+router = APIRouter()
+
+@router.post("/monitor")
+def monitor(host: str):
+    result = subprocess.run(["ping","-c","1",host])
+    return {"host": host, "status": "UP" if result.returncode==0 else "DOWN"}
